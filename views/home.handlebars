@@ -1,0 +1,26 @@
+<section class="section is-flex is-flex-direction-column is-justify-content-center">
+  <div>
+    <p class="subtitle is-4">Equipos: <strong>{{data.teamsLenght}}</strong>
+    </p>
+  </div>
+  <table class="table is-bordered is-fullwidth">
+    <thead>
+      <tr>
+        <th class="has-background-grey-light">Nombre Equipo</th>
+        <th class="has-background-grey-light">País</th>
+        <th class="has-background-grey-light">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data.teams as |team|}}
+        <tr>
+          <td>{{team.name}}</td>
+          <td>{{team.area.name}}</td>
+          <td>ver, editar, eliminar</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+</section>
