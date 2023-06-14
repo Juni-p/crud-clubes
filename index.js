@@ -31,10 +31,6 @@ app.get('/team/:id/view', (req, res) => {
       team: teamsData.find(({ id }) => id === teamId),
     },
   });
-  /* const teamId = Number(req.params.id);
-  const foundTeam = teamsData.find(({ id }) => id === teamId);
-  console.log(foundTeam);
-  res.end(`${foundTeam}`); */
 });
 
 app.listen(PORT, () => {
