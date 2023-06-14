@@ -1,0 +1,40 @@
+<section class="section is-flex is-flex-direction-column is-align-items-center">
+  <figure class="image is-128x128">
+    <img src="{{data.team.crestUrl}}" />
+  </figure>
+  <h2 class="title is-2 mt-6">{{data.team.name}}</h2>
+  <table class="table is-bordered">
+    <thead>
+      <tr>
+        <th class="has-background-grey-light">Información</th>
+        <th class="has-background-grey-light">Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>Country</td>
+          <td>{{data.team.area.name}}</td>
+        </tr>
+        <tr>
+          <td>TLA</td>
+          <td>{{data.team.tla}}</td>
+        </tr>
+        <tr>
+          <td>Stadium</td>
+          <td>{{data.team.venue}}</td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td>{{data.team.address}}</td>
+        </tr>
+        <tr>
+          <td>Club Colors</td>
+          <td>{{data.team.clubColors}}</td>
+        </tr>
+        <tr>
+          <td>Founded</td>
+          <td>{{data.team.founded}}</td>
+        </tr>
+    </tbody>
+  </table>
+</section>

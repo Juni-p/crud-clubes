@@ -23,6 +23,20 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/team/:id/view', (req, res) => {
+  const teamId = Number(req.params.id);
+  res.render('team', {
+    layout: 'main',
+    data: {
+      team: teamsData.find(({ id }) => id === teamId),
+    },
+  });
+  /* const teamId = Number(req.params.id);
+  const foundTeam = teamsData.find(({ id }) => id === teamId);
+  console.log(foundTeam);
+  res.end(`${foundTeam}`); */
+});
+
 app.listen(PORT, () => {
   console.log(`Escuchando el puerto ${PORT}`);
 });

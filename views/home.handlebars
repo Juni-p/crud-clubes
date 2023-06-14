@@ -12,11 +12,21 @@
       </tr>
     </thead>
     <tbody>
-      {{#each data.teams as |team|}}
+      {{#each data.teamsData as |team|}}
         <tr>
           <td>{{team.name}}</td>
           <td>{{team.area.name}}</td>
-          <td>ver, editar, eliminar</td>
+          <td>
+            <a href="/team/{{team.id}}/view">
+              ver
+            </a>,
+            <a href="">
+              editar
+            </a>,
+            <a href="">
+              eliminar
+            </a>
+          </td>
         </tr>
       {{/each}}
     </tbody>
