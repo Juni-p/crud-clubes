@@ -1,0 +1,43 @@
+
+<section class="container is-max-desktop py-6">
+  {{#if data.message}}
+    <div class="notification is-success">
+      {{data.message}}
+    </div>
+  {{/if}}
+  <form action="/form" method="POST" enctype="multipart/form-data">
+    <label class="label" for="name">Nombre: </label>
+    <input class="input" type="text" placeholder="Name" name="name" required/>
+
+    <label class="label" for="country">País: </label>
+    <input class="input" type="text" placeholder="Country" name="country" required/>
+
+    <label class="label" for="tla">TLA: </label>
+    <input class="input" type="text" placeholder="TLA" name="tla" required/>
+
+    <label class="label" for="stadium">Estadio: </label>
+    <input class="input" type="text" placeholder="Stadium" name="stadium" required/>
+
+    <label class="label" for="address">Dirección: </label>
+    <input class="input" type="text" placeholder="Address" name="address" required/>
+
+    <label class="label" for="clubColors">Colores del club: </label>
+    <input
+      class="input"
+      type="text"
+      placeholder="Club Colors"
+      name="clubColors"
+      required
+    />
+
+    <label class="label" for="founded">Fundado en: </label>
+    <input class="input" type="number" placeholder="Founded" name="founded" required/>
+
+    <label class="label" for="image">Escudo: </label>
+    <input class="input" type="file" name="image" required/>
+
+    <div class="has-text-centered">
+      <input class="button is-info mt-3" type="submit" value="Submit" />
+    </div>
+  </form>
+</section>
