@@ -86,6 +86,40 @@ app.post('/form', upload.single('image'), (req, res) => {
   });
 });
 
+app.get('/team/:id/edit', (req, res) => {
+  const teamId = Number(req.params.id);
+  res.render('formEdit', {
+    layout: 'main',
+    data: {
+      team: teamsData.find(({ id }) => id === teamId),
+    },
+  });
+});
+
+app.post('/team/:id/edit', upload.single('image'), (req, res) => {
+  const teamId = Number(req.params.id);
+
+  const team = teamsData.find(({ id }) => id === teamId);
+
+  const teamIndex = teamsData.findIndex(({ id }) => id === teamId);
+
+  const newTeamData = req.body;
+
+  teamsData[teamIndex] = {
+    ...team, ...newTeamData,
+  };
+
+  fs.writeFileSync('./data/equipos.json', JSON.stringify(teamsData));
+
+  res.render('formEdit', {
+    layout: 'main',
+    data: {
+      team: teamsData.find(({ id }) => id === teamId),
+      message: 'Equipo editado con exito!',
+    },
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Escuchando el puerto ${PORT}`);
 });

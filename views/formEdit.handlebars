@@ -1,0 +1,44 @@
+<section class="container is-max-desktop py-6">
+  {{#if data.message}}
+    <div class="notification is-success is-flex is-justify-content-space-between is-align-items-center">
+      {{data.message}}
+      <a class="button" href="/team/{{data.team.id}}/view">Ver</a>
+    </div>
+  {{/if}}
+  <form action="/team/{{data.team.id}}/edit" method="POST" enctype="multipart/form-data">
+    <label class="label" for="name">Nombre: </label>
+    <input class="input" type="text" placeholder="Name" name="name" value="{{data.team.name}}" required/>
+
+    <label class="label" for="country">País: </label>
+    <input class="input" type="text" placeholder="Country" name="country" value="{{data.team.area.name}}" required/>
+
+    <label class="label" for="tla">TLA: </label>
+    <input class="input" type="text" placeholder="TLA" name="tla" value="{{data.team.tla}}" required/>
+
+    <label class="label" for="stadium">Estadio: </label>
+    <input class="input" type="text" placeholder="Stadium" name="stadium" value="{{data.team.venue}}" required/>
+
+    <label class="label" for="address">Dirección: </label>
+    <input class="input" type="text" placeholder="Address" name="address" value="{{data.team.address}}" required/>
+
+    <label class="label" for="clubColors">Colores del club: </label>
+    <input
+      class="input"
+      type="text"
+      placeholder="Club Colors"
+      name="clubColors"
+      value="{{data.team.clubColors}}"
+      required
+    />
+
+    <label class="label" for="founded">Fundado en: </label>
+    <input class="input" type="number" placeholder="Founded" name="founded" value="{{data.team.founded}}" required/>
+
+    <label class="label" for="image">Escudo: </label>
+    <input class="input" type="file" name="image"/>
+
+    <div class="has-text-centered">
+      <input class="button is-info mt-3" type="submit" value="Actualizar equipo" />
+    </div>
+  </form>
+</section>
