@@ -11,31 +11,34 @@
       </tr>
     </thead>
     <tbody>
-        <tr>
-          <td>País</td>
-          <td>{{data.team.area.name}}</td>
-        </tr>
-        <tr>
-          <td>TLA</td>
-          <td>{{data.team.tla}}</td>
-        </tr>
-        <tr>
-          <td>Estadio</td>
-          <td>{{data.team.venue}}</td>
-        </tr>
-        <tr>
-          <td>Dirección</td>
-          <td>{{data.team.address}}</td>
-        </tr>
-        <tr>
-          <td>Colores del club</td>
-          <td>{{data.team.clubColors}}</td>
-        </tr>
-        <tr>
-          <td>Fundado en</td>
-          <td>{{data.team.founded}}</td>
-        </tr>
+      <tr>
+        <td>País</td>
+        <td>{{data.team.area.name}}</td>
+      </tr>
+      <tr>
+        <td>TLA</td>
+        <td>{{data.team.tla}}</td>
+      </tr>
+      <tr>
+        <td>Estadio</td>
+        <td>{{data.team.venue}}</td>
+      </tr>
+      <tr>
+        <td>Dirección</td>
+        <td>{{data.team.address}}</td>
+      </tr>
+      <tr>
+        <td>Colores del club</td>
+        <td>{{data.team.clubColors}}</td>
+      </tr>
+      <tr>
+        <td>Fundado en</td>
+        <td>{{data.team.founded}}</td>
+      </tr>
     </tbody>
   </table>
-  <a class="button is-dark" href="/team/{{data.team.id}}/edit">Editar</a>
+  <div>
+    <a class="button is-dark" href="/team/{{data.team.id}}/edit">Editar</a>
+    <a class="button is-danger" href="/team/{{data.team.id}}/delete">Eliminar</a>
+  </div>
 </section>

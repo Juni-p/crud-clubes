@@ -1,0 +1,21 @@
+<section class="container is-max-desktop py-6">
+  <div class="has-text-centered">
+    <h2 class="title is-2">Estas seguro de eliminar el equipo {{data.team.name}}?</h2>
+    <span class="subtitle is-4">Este cambio no puede revertirse!</span>
+  </div>
+  <form
+    action="/team/{{data.team.id}}/delete"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="has-text-centered mt-3">
+      <input
+        class="button is-danger"
+        type="submit"
+        value="Si, eliminar equipo"
+      />
+      <a class="button is-light" href="/">Cancelar</a>
+    </div>
+
+  </form>
+</section>
