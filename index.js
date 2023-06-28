@@ -105,6 +105,11 @@ app.post('/team/:id/edit', upload.single('image'), (req, res) => {
 
   const newTeamData = req.body;
 
+  if (req.file) {
+    const teamImage = `/images/${req.file.filename}`;
+    team.crestUrl = teamImage;
+  }
+
   teamsData[teamIndex] = {
     ...team, ...newTeamData,
   };
