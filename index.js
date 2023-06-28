@@ -120,6 +120,23 @@ app.post('/team/:id/edit', upload.single('image'), (req, res) => {
   });
 });
 
+app.get('/team/:id/delete', (req, res) => {
+  const teamId = Number(req.params.id);
+  res.render('formDelete', {
+    layout: 'main',
+    data: {
+      team: teamsData.find(({ id }) => id === teamId),
+    },
+  });
+});
+
+app.post('/team/:id/delete', (req, res) => {
+  const teamId = Number(req.params.id);
+  const filterNewTeams = teamsData.filter(({ id }) => id !== teamId);
+  fs.writeFileSync('./data/equipos.json', JSON.stringify(filterNewTeams));
+  res.redirect('/');
+});
+
 app.listen(PORT, () => {
   console.log(`Escuchando el puerto ${PORT}`);
 });
