@@ -1,6 +1,6 @@
 <section class="section is-flex is-flex-direction-column is-justify-content-center">
   <div class="is-flex is-align-items-center mb-3">
-    <p class="is-size-5 mr-3">Equipos: <strong>{{data.teamsLenght}}</strong></p>
+    <p class="is-size-5 mr-3">Equipos: <strong>{{data.teamsLength}}</strong></p>
     <a class="button is-dark" href="/form">Agregar Equipo</a>
   </div>
   <table class="table is-bordered is-fullwidth">
@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#each data.teamsData as |team|}}
+      {{#each data.teams as |team|}}
         <tr>
           <td>{{team.name}}</td>
           <td>{{team.area.name}}</td>

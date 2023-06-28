@@ -25,25 +25,32 @@ const PORT = 8080;
 
 app.use(express.static(`${__dirname}/uploads`));
 
-const teamsData = JSON.parse(fs.readFileSync('./data/equipos.json'));
-const teamsLenght = teamsData.length;
+function getTeams() {
+  return JSON.parse(fs.readFileSync('./data/equipos.json'));
+}
+
+function saveTeamsData(teams) {
+  fs.writeFileSync('./data/equipos.json', JSON.stringify(teams));
+}
+
+function createTeam(newTeam) {
+  const teams = getTeams();
+  teams.push(newTeam);
+  saveTeamsData(teams);
+}
+
+function generateRandomId() {
+  return Math.floor(Date.now() * Math.random());
+}
 
 app.get('/', (req, res) => {
+  const teams = getTeams();
+  const teamsLength = teams.length;
   res.render('home', {
     layout: 'main',
     data: {
-      teamsData,
-      teamsLenght,
-    },
-  });
-});
-
-app.get('/team/:id/view', (req, res) => {
-  const teamId = Number(req.params.id);
-  res.render('team', {
-    layout: 'main',
-    data: {
-      team: teamsData.find(({ id }) => id === teamId),
+      teams,
+      teamsLength,
     },
   });
 });
@@ -54,18 +61,9 @@ app.get('/form', (req, res) => {
   });
 });
 
-function createTeam(newTeam) {
-  teamsData.push(newTeam);
-  fs.writeFileSync('./data/equipos.json', JSON.stringify(teamsData));
-}
-
-function generateRamdomId() {
-  return Math.floor(Date.now() * Math.random());
-}
-
 app.post('/form', upload.single('image'), (req, res) => {
   const team = {
-    id: generateRamdomId(),
+    id: generateRandomId(),
     name: req.body.name,
     area: {
       name: req.body.country,
@@ -77,7 +75,9 @@ app.post('/form', upload.single('image'), (req, res) => {
     clubColors: req.body.clubColors,
     founded: req.body.founded,
   };
+
   createTeam(team);
+
   res.render('form', {
     layout: 'main',
     data: {
@@ -86,22 +86,40 @@ app.post('/form', upload.single('image'), (req, res) => {
   });
 });
 
+app.get('/team/:id/view', (req, res) => {
+  const teamId = Number(req.params.id);
+  const teams = getTeams();
+
+  const team = teams.find(({ id }) => id === teamId);
+
+  res.render('team', {
+    layout: 'main',
+    data: {
+      team,
+    },
+  });
+});
+
 app.get('/team/:id/edit', (req, res) => {
   const teamId = Number(req.params.id);
+  const teams = getTeams();
+
+  const team = teams.find(({ id }) => id === teamId);
+
   res.render('formEdit', {
     layout: 'main',
     data: {
-      team: teamsData.find(({ id }) => id === teamId),
+      team,
     },
   });
 });
 
 app.post('/team/:id/edit', upload.single('image'), (req, res) => {
   const teamId = Number(req.params.id);
+  const teams = getTeams();
 
-  const team = teamsData.find(({ id }) => id === teamId);
-
-  const teamIndex = teamsData.findIndex(({ id }) => id === teamId);
+  const team = teams.find(({ id }) => id === teamId);
+  const teamIndex = teams.findIndex(({ id }) => id === teamId);
 
   const newTeamData = req.body;
 
@@ -110,16 +128,18 @@ app.post('/team/:id/edit', upload.single('image'), (req, res) => {
     team.crestUrl = teamImage;
   }
 
-  teamsData[teamIndex] = {
+  teams[teamIndex] = {
     ...team, ...newTeamData,
   };
 
-  fs.writeFileSync('./data/equipos.json', JSON.stringify(teamsData));
+  saveTeamsData(teams);
+
+  const updateTeam = teams.find(({ id }) => id === teamId);
 
   res.render('formEdit', {
     layout: 'main',
     data: {
-      team: teamsData.find(({ id }) => id === teamId),
+      team: updateTeam,
       message: 'Equipo editado con exito!',
     },
   });
@@ -127,18 +147,26 @@ app.post('/team/:id/edit', upload.single('image'), (req, res) => {
 
 app.get('/team/:id/delete', (req, res) => {
   const teamId = Number(req.params.id);
+  const teams = getTeams();
+
+  const team = teams.find(({ id }) => id === teamId);
+
   res.render('formDelete', {
     layout: 'main',
     data: {
-      team: teamsData.find(({ id }) => id === teamId),
+      team,
     },
   });
 });
 
 app.post('/team/:id/delete', (req, res) => {
   const teamId = Number(req.params.id);
-  const filterNewTeams = teamsData.filter(({ id }) => id !== teamId);
-  fs.writeFileSync('./data/equipos.json', JSON.stringify(filterNewTeams));
+  const teams = getTeams();
+
+  const filteredTeams = teams.filter(({ id }) => id !== teamId);
+
+  saveTeamsData(filteredTeams);
+
   res.redirect('/');
 });
 
